@@ -1,6 +1,8 @@
 class Solution {
 public:
      bool possible(vector<int>& bloomDay, int day,int m,int k) {
+
+        //check whether reqd bouquets possible
             int cnt=0;
             int noB=0;
 
@@ -26,12 +28,16 @@ public:
 
 
     int minDays(vector<int>& bloomDay, int m, int k) {
+        //BRUTE FORCE
+
         // for(int i=*min_element(bloomDay.begin(),bloomDay.end());i<=*max_element(bloomDay.begin(),bloomDay.end());i++) {
         //     if(possible(bloomDay,i,m,k)==true) {
         //         return i;
         //     }
         // }
         // return -1;
+
+        //BINARY SEARCH
         if((long long)m*k > bloomDay.size()) return -1;
 
         int low=*min_element(bloomDay.begin(),bloomDay.end());
@@ -41,11 +47,14 @@ public:
         while(low<=high) {
             int mid=low+(high-low)/2;
             if(possible(bloomDay,mid,m,k)) {
-                ans=mid;
+                ans=mid;  //mid works
 
-                high=mid-1;
+                high=mid-1;  //maybe earlier day also works
             }
             else {
+
+                //mid does not work
+                //have to wait more days
                 low=mid+1;
             }
 
